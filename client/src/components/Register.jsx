@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const navigate = useNavigate();
 
@@ -18,13 +18,13 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', {
+      const res = await axios.post("http://localhost:5000/api/auth/register", {
         username,
         email,
         password,
       });
       console.log(res.data);
-      navigate('/login');
+      navigate("/login");
     } catch (err) {
       console.error(err.response.data);
     }

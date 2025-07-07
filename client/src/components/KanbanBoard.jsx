@@ -1,38 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import io from 'socket.io-client';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import io from "socket.io-client";
 
-const socket = io('http://localhost:5000');
+const socket = io("http://localhost:5000");
 
 const KanbanBoard = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const res = await axios.get('/api/tasks', {
-        headers: { 'x-auth-token': localStorage.getItem('token') },
+      const res = await axios.get("/api/tasks", {
+        headers: { "x-auth-token": localStorage.getItem("token") },
       });
       setTasks(res.data);
     };
 
     fetchTasks();
 
-    socket.on('task_updated', () => {
+    socket.on("task_updated", () => {
       fetchTasks();
     });
 
     return () => {
-      socket.off('task_updated');
+      socket.off("task_updated");
     };
   }, []);
 
   const handleSmartAssign = async (taskId) => {
     try {
-      await axios.post(`/api/tasks/${taskId}/smart-assign`, {}, {
-        headers: { 'x-auth-token': localStorage.getItem('token') },
-      });
-      socket.emit('task_update');
+      await axios.post(
+        `/api/tasks/${taskId}/smart-assign`,
+        {},
+        {
+          headers: { "x-auth-token": localStorage.getItem("token") },
+        }
+      );
+      socket.emit("task_update");
     } catch (err) {
       console.error(err);
     }
@@ -57,13 +61,17 @@ const KanbanBoard = () => {
     newTasks.splice(source.index, 1);
     newTasks.splice(destination.index, 0, task);
 
-    const updatedTask = { ...task, status: destination.droppableId, version: task.version };
+    const updatedTask = {
+      ...task,
+      status: destination.droppableId,
+      version: task.version,
+    };
 
     try {
       await axios.put(`/api/tasks/${draggableId}`, updatedTask, {
-        headers: { 'x-auth-token': localStorage.getItem('token') },
+        headers: { "x-auth-token": localStorage.getItem("token") },
       });
-      socket.emit('task_update');
+      socket.emit("task_update");
     } catch (err) {
       console.error(err);
     }
@@ -72,7 +80,7 @@ const KanbanBoard = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="kanban-board">
-        {['Todo', 'In Progress', 'Done'].map((status) => (
+        {["Todo", "In Progress", "Done"].map((status) => (
           <Droppable droppableId={status} key={status}>
             {(provided) => (
               <div
@@ -95,14 +103,16 @@ const KanbanBoard = () => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           className={`task-card ${
-                            snapshot.isDragging ? 'dragging' : ''
+                            snapshot.isDragging ? "dragging" : ""
                           }`}
                         >
                           <h4>{task.title}</h4>
                           <p>{task.description}</p>
                           <p>Priority: {task.priority}</p>
                           <p>Assigned to: {task.assignedTo?.username}</p>
-                          <button onClick={() => handleSmartAssign(task._id)}>Smart Assign</button>
+                          <button onClick={() => handleSmartAssign(task._id)}>
+                            Smart Assign
+                          </button>
                         </div>
                       )}
                     </Draggable>

@@ -22,7 +22,7 @@ const io = new Server(server, {
     origin: "*",
   },
 });
-app.set('io', io);
+app.set("io", io);
 
 const PORT = process.env.PORT || 5000;
 
