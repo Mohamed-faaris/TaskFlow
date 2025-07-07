@@ -21,6 +21,7 @@ const io = new Server(server, {
     origin: "*",
   },
 });
+app.set('io', io);
 
 const PORT = process.env.PORT || 5000;
 
@@ -37,6 +38,10 @@ io.on("connection", (socket) => {
 
   socket.on("task_update", () => {
     io.emit("task_updated");
+  });
+
+  socket.on("action_log_update", () => {
+    io.emit("action_log_updated");
   });
 
   socket.on("disconnect", () => {

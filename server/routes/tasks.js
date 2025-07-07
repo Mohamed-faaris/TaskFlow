@@ -37,6 +37,8 @@ router.post('/', auth, async (req, res) => {
     });
     await action.save();
 
+    req.app.get('io').emit('action_log_updated');
+
     res.json(task);
   } catch (err) {
     console.error(err.message);
@@ -67,6 +69,8 @@ router.put('/:id', auth, async (req, res) => {
     });
     await action.save();
 
+    req.app.get('io').emit('action_log_updated');
+
     res.json(task);
   } catch (err) {
     console.error(err.message);
@@ -88,6 +92,8 @@ router.delete('/:id', auth, async (req, res) => {
       action: `deleted task "${task.title}"`,
     });
     await action.save();
+
+    req.app.get('io').emit('action_log_updated');
 
     res.json({ msg: 'Task removed' });
   } catch (err) {
