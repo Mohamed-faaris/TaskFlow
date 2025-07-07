@@ -7,6 +7,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import taskRoutes from "./routes/tasks.js";
 import actionRoutes from "./routes/actions.js";
+import smartAssignRoutes from "./routes/smart-assign.js";
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/actions", actionRoutes);
+app.use("/api/tasks", smartAssignRoutes);
 
 io.on("connection", (socket) => {
   console.log("a user connected");

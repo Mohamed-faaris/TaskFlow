@@ -27,6 +27,17 @@ const KanbanBoard = () => {
     };
   }, []);
 
+  const handleSmartAssign = async (taskId) => {
+    try {
+      await axios.post(`/api/tasks/${taskId}/smart-assign`, {}, {
+        headers: { 'x-auth-token': localStorage.getItem('token') },
+      });
+      socket.emit('task_update');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const onDragEnd = async (result) => {
     const { destination, source, draggableId } = result;
 
@@ -91,6 +102,7 @@ const KanbanBoard = () => {
                           <p>{task.description}</p>
                           <p>Priority: {task.priority}</p>
                           <p>Assigned to: {task.assignedTo?.username}</p>
+                          <button onClick={() => handleSmartAssign(task._id)}>Smart Assign</button>
                         </div>
                       )}
                     </Draggable>
