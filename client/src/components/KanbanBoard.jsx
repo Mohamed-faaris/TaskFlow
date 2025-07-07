@@ -78,12 +78,14 @@ const KanbanBoard = () => {
                       draggableId={task._id}
                       index={index}
                     >
-                      {(provided) => (
+                      {(provided, snapshot) => (
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="task-card"
+                          className={`task-card ${
+                            snapshot.isDragging ? 'dragging' : ''
+                          }`}
                         >
                           <h4>{task.title}</h4>
                           <p>{task.description}</p>

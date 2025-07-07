@@ -103,6 +103,11 @@ button:hover {
   margin-bottom: 1rem;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: transform 0.2s ease-in-out;
+}
+
+.task-card.dragging {
+  transform: rotateY(180deg);
 }
 
 .activity-log {
@@ -121,4 +126,19 @@ button:hover {
   margin: 0;
   max-height: 150px;
   overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .kanban-board {
+    flex-direction: column;
+  }
+
+  .task-list {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .activity-log {
+    position: relative;
+  }
 }
