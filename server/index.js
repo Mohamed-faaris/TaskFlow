@@ -3,10 +3,17 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/auth.js";
+import taskRoutes from "./routes/tasks.js";
+import actionRoutes from "./routes/actions.js";
 
 dotenv.config();
 
+connectDB();
+
 const app = express();
+app.use(express.json({ extended: false }));
 app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -21,8 +28,17 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/actions", actionRoutes);
+
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on("task_update", () => {
+    io.emit("task_updated");
+  });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
