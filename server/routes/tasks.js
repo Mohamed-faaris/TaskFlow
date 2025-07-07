@@ -48,18 +48,23 @@ router.post('/', auth, async (req, res) => {
 
 // Update a task
 router.put('/:id', auth, async (req, res) => {
-  const { title, description, assignedTo, status, priority } = req.body;
+  const { title, description, assignedTo, status, priority, version } = req.body;
 
   try {
     let task = await Task.findById(req.params.id);
 
     if (!task) return res.status(404).json({ msg: 'Task not found' });
 
+    if (task.version !== version) {
+      return res.status(409).json({ msg: 'Conflict: Task has been updated by another user.' });
+    }
+
     task.title = title;
     task.description = description;
     task.assignedTo = assignedTo;
     task.status = status;
     task.priority = priority;
+    task.version += 1;
 
     await task.save();
 

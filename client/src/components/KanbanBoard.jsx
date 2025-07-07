@@ -46,7 +46,7 @@ const KanbanBoard = () => {
     newTasks.splice(source.index, 1);
     newTasks.splice(destination.index, 0, task);
 
-    const updatedTask = { ...task, status: destination.droppableId };
+    const updatedTask = { ...task, status: destination.droppableId, version: task.version };
 
     try {
       await axios.put(`/api/tasks/${draggableId}`, updatedTask, {

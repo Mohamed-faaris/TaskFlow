@@ -22,6 +22,10 @@ const TaskSchema = new mongoose.Schema({
     enum: ["Low", "Medium", "High"],
     default: "Medium",
   },
+  version: {
+    type: Number,
+    default: 1,
+  },
 });
 
 const Task = mongoose.model("Task", TaskSchema);
