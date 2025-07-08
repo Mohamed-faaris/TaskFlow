@@ -3,16 +3,17 @@ import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+const socket = io("http://localhost:5000", {
+  withCredentials: true,
+  transports: ['websocket', 'polling']
+});
 
 const KanbanBoard = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const res = await axios.get("/api/tasks", {
-        headers: { "x-auth-token": localStorage.getItem("token") },
-      });
+      const res = await axios.get("/api/tasks");
       setTasks(res.data);
     };
 
@@ -29,13 +30,7 @@ const KanbanBoard = () => {
 
   const handleSmartAssign = async (taskId) => {
     try {
-      await axios.post(
-        `/api/tasks/${taskId}/smart-assign`,
-        {},
-        {
-          headers: { "x-auth-token": localStorage.getItem("token") },
-        }
-      );
+      await axios.post(`/api/tasks/${taskId}/smart-assign`);
       socket.emit("task_update");
     } catch (err) {
       console.error(err);

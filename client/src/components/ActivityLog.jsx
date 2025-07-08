@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+const socket = io("http://localhost:5000", {
+  withCredentials: true,
+  transports: ['websocket', 'polling']
+});
 
 const ActivityLog = () => {
   const [actions, setActions] = useState([]);

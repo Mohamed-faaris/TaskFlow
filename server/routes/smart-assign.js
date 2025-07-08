@@ -6,7 +6,7 @@ import auth from "../middleware/auth.js";
 const router = express.Router();
 
 // Smart assign a task
-router.post("/:id/smart-assign", auth, async (req, res) => {
+router.post("/:id/smart-assign", async (req, res) => {
   try {
     const users = await User.find();
     const tasks = await Task.find({ status: { $ne: "Done" } });

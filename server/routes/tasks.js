@@ -6,18 +6,21 @@ import Action from "../models/Action.js";
 const router = express.Router();
 
 // Get all tasks
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
+    console.log("Fetching tasks...");
     const tasks = await Task.find().populate("assignedTo", "username");
+    console.log("Tasks fetched successfully:", tasks.length);
     res.json(tasks);
   } catch (err) {
-    console.error(err.message);
+    console.error("Error fetching tasks:", err.message);
+    console.error("Stack trace:", err.stack);
     res.status(500).send("Server Error");
   }
 });
 
 // Create a task
-router.post("/", auth, async (req, res) => {
+router.post("/", async (req, res) => {
   const { title, description, assignedTo, status, priority } = req.body;
 
   try {
@@ -31,8 +34,9 @@ router.post("/", auth, async (req, res) => {
 
     const task = await newTask.save();
 
+    // Create action log without user authentication for now
     const action = new Action({
-      user: req.user.id,
+      user: null, // Will be null for now
       action: `created task "${title}"`,
     });
     await action.save();
@@ -41,13 +45,13 @@ router.post("/", auth, async (req, res) => {
 
     res.json(task);
   } catch (err) {
-    console.error(err.message);
+    console.error("Error creating task:", err.message);
     res.status(500).send("Server Error");
   }
 });
 
 // Update a task
-router.put("/:id", auth, async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { title, description, assignedTo, status, priority, version } =
     req.body;
 
@@ -72,7 +76,7 @@ router.put("/:id", auth, async (req, res) => {
     await task.save();
 
     const action = new Action({
-      user: req.user.id,
+      user: null, // Will be null for now
       action: `updated task "${title}"`,
     });
     await action.save();
