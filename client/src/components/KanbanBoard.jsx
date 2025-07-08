@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import io from "socket.io-client";
+import AddTask from "./AddTask";
+import Modal from "./Modal";
+import { PlusCircle, BrainCircuit, ListTodo, Timer, CheckCircle } from 'lucide-react';
 
 const socket = io("http://localhost:5000", {
   withCredentials: true,
@@ -10,11 +13,19 @@ const socket = io("http://localhost:5000", {
 
 const KanbanBoard = () => {
   const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showAddTask, setShowAddTask] = useState(false);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const res = await axios.get("/api/tasks");
-      setTasks(res.data);
+      try {
+        const res = await axios.get("/api/tasks");
+        setTasks(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchTasks();
@@ -27,6 +38,12 @@ const KanbanBoard = () => {
       socket.off("task_updated");
     };
   }, []);
+
+  const handleTaskAdded = (task) => {
+    setTasks([...tasks, task]);
+    setShowAddTask(false);
+    socket.emit("task_update");
+  };
 
   const handleSmartAssign = async (taskId) => {
     try {
@@ -72,53 +89,73 @@ const KanbanBoard = () => {
     }
   };
 
+  if (loading) {
+    return <div className="loading">Loading tasks...</div>;
+  }
+
+  const columnIcons = {
+    "Todo": <ListTodo className="column-icon" />,
+    "In Progress": <Timer className="column-icon" />,
+    "Done": <CheckCircle className="column-icon" />
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="kanban-board">
-        {["Todo", "In Progress", "Done"].map((status) => (
-          <Droppable droppableId={status} key={status}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className="task-list"
-              >
-                <h2>{status}</h2>
-                {tasks
-                  .filter((task) => task.status === status)
-                  .map((task, index) => (
-                    <Draggable
-                      key={task._id}
-                      draggableId={task._id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className={`task-card ${
-                            snapshot.isDragging ? "dragging" : ""
-                          }`}
-                        >
-                          <h4>{task.title}</h4>
-                          <p>{task.description}</p>
-                          <p>Priority: {task.priority}</p>
-                          <p>Assigned to: {task.assignedTo?.username}</p>
-                          <button onClick={() => handleSmartAssign(task._id)}>
-                            Smart Assign
-                          </button>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        ))}
+    <>
+      <div className="add-task-container">
+        <button onClick={() => setShowAddTask(true)} className="btn btn-primary">
+          <PlusCircle size={18} /> Add Task
+        </button>
       </div>
-    </DragDropContext>
+      <Modal show={showAddTask} onClose={() => setShowAddTask(false)}>
+        <AddTask onTaskAdded={handleTaskAdded} />
+      </Modal>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="kanban-board">
+          {["Todo", "In Progress", "Done"].map((status) => (
+            <Droppable droppableId={status} key={status}>
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className="task-list"
+                >
+                  <h2>{columnIcons[status]} {status}</h2>
+                  {tasks
+                    .filter((task) => task.status === status)
+                    .map((task, index) => (
+                      <Draggable
+                        key={task._id}
+                        draggableId={task._id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className={`task-card ${
+                              snapshot.isDragging ? "dragging" : ""
+                            }`}
+                          >
+                            <h4>{task.title}</h4>
+                            <p>{task.description}</p>
+                            <p>Priority: {task.priority}</p>
+                            <p>Assigned to: {task.assignedTo?.username}</p>
+                            <button onClick={() => handleSmartAssign(task._id)} className="btn-smart-assign">
+                              <BrainCircuit size={16} /> Smart Assign
+                            </button>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))}
+        </div>
+      </DragDropContext>
+    </>
   );
 };
 

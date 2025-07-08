@@ -33,7 +33,7 @@ const ActivityLog = () => {
       <ul>
         {actions.map((action) => (
           <li key={action._id}>
-            {action.user.username} {action.action} at{" "}
+            {(action.user ? action.user.username : 'A user')} {action.action} at{" "}
             {new Date(action.timestamp).toLocaleString()}
           </li>
         ))}
