@@ -4,11 +4,17 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import io from "socket.io-client";
 import AddTask from "./AddTask";
 import Modal from "./Modal";
-import { PlusCircle, BrainCircuit, ListTodo, Timer, CheckCircle } from 'lucide-react';
+import {
+  PlusCircle,
+  BrainCircuit,
+  ListTodo,
+  Timer,
+  CheckCircle,
+} from "lucide-react";
 
 const socket = io("http://localhost:5000", {
   withCredentials: true,
-  transports: ['websocket', 'polling']
+  transports: ["websocket", "polling"],
 });
 
 const KanbanBoard = () => {
@@ -68,10 +74,14 @@ const KanbanBoard = () => {
       return;
     }
 
+    const originalTasks = [...tasks];
     const task = tasks.find((task) => task._id === draggableId);
-    const newTasks = Array.from(tasks);
-    newTasks.splice(source.index, 1);
-    newTasks.splice(destination.index, 0, task);
+
+    // Optimistically update the UI
+    const optimisticTasks = tasks.map((t) =>
+      t._id === draggableId ? { ...t, status: destination.droppableId } : t
+    );
+    setTasks(optimisticTasks);
 
     const updatedTask = {
       ...task,
@@ -85,7 +95,10 @@ const KanbanBoard = () => {
       });
       socket.emit("task_update");
     } catch (err) {
-      console.error(err);
+      // Revert to the original state if the update fails
+      setTasks(originalTasks);
+      console.error("Failed to update task. Reverting changes.", err);
+      alert("Error: Could not update the task. Please try again.");
     }
   };
 
@@ -94,15 +107,18 @@ const KanbanBoard = () => {
   }
 
   const columnIcons = {
-    "Todo": <ListTodo className="column-icon" />,
+    Todo: <ListTodo className="column-icon" />,
     "In Progress": <Timer className="column-icon" />,
-    "Done": <CheckCircle className="column-icon" />
+    Done: <CheckCircle className="column-icon" />,
   };
 
   return (
     <>
       <div className="add-task-container">
-        <button onClick={() => setShowAddTask(true)} className="btn btn-primary">
+        <button
+          onClick={() => setShowAddTask(true)}
+          className="btn btn-primary"
+        >
           <PlusCircle size={18} /> Add Task
         </button>
       </div>
@@ -119,7 +135,9 @@ const KanbanBoard = () => {
                   {...provided.droppableProps}
                   className="task-list"
                 >
-                  <h2>{columnIcons[status]} {status}</h2>
+                  <h2>
+                    {columnIcons[status]} {status}
+                  </h2>
                   {tasks
                     .filter((task) => task.status === status)
                     .map((task, index) => (
@@ -141,7 +159,10 @@ const KanbanBoard = () => {
                             <p>{task.description}</p>
                             <p>Priority: {task.priority}</p>
                             <p>Assigned to: {task.assignedTo?.username}</p>
-                            <button onClick={() => handleSmartAssign(task._id)} className="btn-smart-assign">
+                            <button
+                              onClick={() => handleSmartAssign(task._id)}
+                              className="btn-smart-assign"
+                            >
                               <BrainCircuit size={16} /> Smart Assign
                             </button>
                           </div>

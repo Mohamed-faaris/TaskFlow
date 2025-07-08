@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Modal = ({ show, onClose, children }) => {
   if (!show) {
@@ -7,8 +7,13 @@ const Modal = ({ show, onClose, children }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className={`modal-content ${show ? 'modal-enter' : 'modal-exit'}`} onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>&times;</button>
+      <div
+        className={`modal-content ${show ? "modal-enter" : "modal-exit"}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose}>
+          &times;
+        </button>
         {children}
       </div>
     </div>

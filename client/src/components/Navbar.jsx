@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -8,16 +8,16 @@ const Navbar = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (token) {
         try {
-          const res = await axios.get('/api/auth', {
-            headers: { 'x-auth-token': token },
+          const res = await axios.get("/api/auth", {
+            headers: { "x-auth-token": token },
           });
           setUser(res.data);
         } catch (err) {
           console.error(err);
-          localStorage.removeItem('token');
+          localStorage.removeItem("token");
         }
       }
     };
@@ -25,9 +25,9 @@ const Navbar = () => {
   }, []);
 
   const onLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -39,7 +39,9 @@ const Navbar = () => {
         {user ? (
           <>
             <span className="navbar-user">Welcome, {user.username}</span>
-            <button onClick={onLogout} className="btn-logout">Logout</button>
+            <button onClick={onLogout} className="btn-logout">
+              Logout
+            </button>
           </>
         ) : (
           <>
