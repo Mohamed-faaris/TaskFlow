@@ -117,7 +117,7 @@ const KanbanBoard = () => {
       <div className="add-task-container">
         <button
           onClick={() => setShowAddTask(true)}
-          className="btn btn-primary"
+          className="btn btn-primary add-task"
         >
           <PlusCircle size={18} /> Add Task
         </button>
