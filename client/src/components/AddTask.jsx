@@ -4,6 +4,7 @@ import axios from "axios";
 const AddTask = ({ onTaskAdded }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("medium");
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -12,10 +13,15 @@ const AddTask = ({ onTaskAdded }) => {
       return;
     }
     try {
-      const res = await axios.post("/api/tasks", { title, description });
+      const res = await axios.post("/api/tasks", { 
+        title, 
+        description,
+        priority 
+      });
       onTaskAdded(res.data);
       setTitle("");
       setDescription("");
+      setPriority("medium");
     } catch (err) {
       console.error(err);
     }
@@ -40,6 +46,19 @@ const AddTask = ({ onTaskAdded }) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+      </div>
+      <div className="form-control">
+        <label>Priority</label>
+        <select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          className="priority-select"
+        >
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
       </div>
       <button type="submit" className="btn btn-block">
         Save Task
