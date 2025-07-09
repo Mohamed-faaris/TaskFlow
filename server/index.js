@@ -61,6 +61,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
   });
 } else {
+  console.log("running in development mode");
   // Development route
   app.get("/", (req, res) => {
     res.send("TaskFlow Server is running in development mode");
