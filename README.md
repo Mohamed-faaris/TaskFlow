@@ -2,7 +2,6 @@
 
 **TaskFlow** is a cutting-edge, real-time collaborative Kanban-style task management application that revolutionizes team productivity. Built with the modern MERN stack and powered by Socket.IO for seamless real-time collaboration.
 
-
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Version](https://img.shields.io/badge/Version-1.0.0-orange)
 
@@ -194,7 +193,7 @@ docker volume rm taskflow-data
 Create a `docker-compose.yml` file in your project root:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 services:
   mongodb:
     image: mongo:latest
@@ -239,6 +238,7 @@ docker-compose restart
 **Environment Configuration:**
 
 Update your `.env` file with:
+
 ```env
 MONGO_URI=mongodb://admin:password@localhost:27017/taskflow?authSource=admin
 ```
@@ -698,6 +698,7 @@ MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/taskflow-prod
 JWT_SECRET=your_production_jwt_secret_very_long_and_secure
 NODE_ENV=production
 PORT=5000
+CLIENT_URL=https://yourdomain.com
 ```
 
 ### Build and Deploy
