@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -41,11 +44,11 @@
   color: #888;
 }
 
-.activity-log-header>h2:nth-child(1){
+.activity-log-header>h2:nth-child(1) {
   flex-grow: 1;
 }
 
-.btn-refresh{
+.btn-refresh {
   width: auto;
 }
 
@@ -62,7 +65,7 @@ nav a {
   padding: 20px;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h1 {
@@ -160,25 +163,35 @@ nav a {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .kanban-board {
   display: flex;
   justify-content: space-around;
-  gap: 20px; /* Add some space between columns */
+  gap: 20px;
+  /* Add some space between columns */
   overflow-x: auto;
 }
 
 .task-list {
   width: 300px;
   flex-shrink: 0;
-  background: #1e1e1e; /* Darker background for the list */
+  background: #1e1e1e;
+  /* Darker background for the list */
   padding: 1rem;
-  border-radius: 10px; /* More rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* A bit more shadow */
-  color: #fff; /* White text for dark background */
+  border-radius: 10px;
+  /* More rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* A bit more shadow */
+  color: #fff;
+  /* White text for dark background */
 }
 
 .task-list h2 {
@@ -189,18 +202,24 @@ nav a {
 }
 
 .task-card {
-  background: #2c2c2c; /* Darker card background */
-  color: #e0e0e0; /* Lighter text color */
+  background: #2c2c2c;
+  /* Darker card background */
+  color: #e0e0e0;
+  /* Lighter text color */
   padding: 1rem;
   margin-bottom: 1rem;
-  border-radius: 8px; /* Slightly more rounded corners */
+  border-radius: 8px;
+  /* Slightly more rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease; /* Smooth transition for all properties */
-  border-left: 5px solid #646cff; /* Accent border */
+  transition: all 0.3s ease;
+  /* Smooth transition for all properties */
+  border-left: 5px solid #646cff;
+  /* Accent border */
 }
 
 .task-card:hover {
-  transform: translateY(-5px); /* Lift effect on hover */
+  transform: translateY(-5px);
+  /* Lift effect on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
@@ -250,9 +269,12 @@ nav a {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Slightly more transparent */
-  -webkit-backdrop-filter: blur(8px); /* Frosted glass effect for Safari */
-  backdrop-filter: blur(8px); /* Frosted glass effect */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Slightly more transparent */
+  -webkit-backdrop-filter: blur(8px);
+  /* Frosted glass effect for Safari */
+  backdrop-filter: blur(8px);
+  /* Frosted glass effect */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -260,14 +282,15 @@ nav a {
 }
 
 .modal-content {
-  background: rgba(30, 30, 30, 0.8); /* Dark, semi-transparent background */
+  background: rgba(30, 30, 30, 0.8);
+  /* Dark, semi-transparent background */
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2.5rem;
   border-radius: 15px;
   position: relative;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   color: #fff;
 }
 
@@ -299,6 +322,7 @@ nav a {
     opacity: 0;
     transform: translateY(-20px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -310,6 +334,7 @@ nav a {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+
   to {
     opacity: 0;
     transform: translateY(-20px) scale(0.98);
@@ -352,8 +377,8 @@ nav a {
   justify-content: center;
 }
 
-.add-task{
-  width:100%
+.add-task {
+  width: 100%
 }
 
 .add-task-form {
@@ -519,7 +544,8 @@ nav a {
 }
 
 .container {
-  padding-top: 80px; /* Add padding to the top of the container to offset the fixed navbar */
+  padding-top: 80px;
+  /* Add padding to the top of the container to offset the fixed navbar */
 }
 
 .activity-log-drawer {
@@ -548,14 +574,14 @@ nav a {
 }
 
 .activity-log-drawer .drawer-toggle-btn {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #a0a0a0;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #a0a0a0;
 }
 
 .activity-log-content {
@@ -579,7 +605,7 @@ nav a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   margin-top: 30px;
 }
 
@@ -622,9 +648,11 @@ nav a {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -675,7 +703,8 @@ nav a {
     width: 90%;
   }
 
-  .form-container, .modal-content {
+  .form-container,
+  .modal-content {
     width: 90%;
     padding: 1.5rem;
   }
@@ -708,6 +737,7 @@ nav a {
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
   }
+
   .navbar-user {
     font-size: 0.7rem;
     margin-bottom: 0.3rem;
