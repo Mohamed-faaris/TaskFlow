@@ -1,6 +1,8 @@
+# ✨ TaskFlow Pro - Core Logic Documentation
+
 ## Smart Assign Logic
 
-The "Smart Assign" feature is designed to automatically delegate a task to the user who currently has the lightest workload. This helps to ensure an even distribution of tasks among all team members.
+The "Smart Assign" feature is the heart of TaskFlow Pro's intelligent task distribution system. It's designed to automatically delegate tasks to the user who currently has the lightest workload, ensuring optimal team efficiency and balanced task distribution.
 
 Here's a step-by-step breakdown of how it works:
 
@@ -19,9 +21,9 @@ Here's a step-by-step breakdown of how it works:
 
 6.  **Real-time Update**: The change in assignment is saved to the database, and a real-time notification is sent to all connected users, ensuring everyone's board reflects the new assignment instantly.
 
-## Conflict Handling Logic
+## Advanced Conflict Resolution System
 
-Conflict handling is crucial in a collaborative environment to prevent users from accidentally overwriting each other's work. This system addresses this by tracking task versions.
+TaskFlow Pro's conflict handling system is a sophisticated solution crucial for maintaining data integrity in collaborative environments. It prevents users from accidentally overwriting each other's work through intelligent version tracking and user-friendly resolution interfaces.
 
 Here’s the process:
 

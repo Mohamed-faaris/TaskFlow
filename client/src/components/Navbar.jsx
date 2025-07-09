@@ -11,7 +11,7 @@ const Navbar = () => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const res = await axios.get("/api/auth", {
+          const res = await axios.get("http://localhost:5000/api/auth", {
             headers: { "x-auth-token": token },
           });
           setUser(res.data);
@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Link to="/">TodoApp</Link>
+        <Link to="/">✨ TaskFlow</Link>
       </div>
       <div className="navbar-links">
         {user ? (
