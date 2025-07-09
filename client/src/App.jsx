@@ -6,29 +6,32 @@ import Register from "./components/Register";
 import ActivityLog from "./components/ActivityLog";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="container">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                <>
-                  <KanbanBoard />
-                  <ActivityLog />
-                </>
-              </PrivateRoute>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <>
+                    <KanbanBoard />
+                    <ActivityLog />
+                  </>
+                </PrivateRoute>
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+      </AuthProvider>
     </Router>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,8 @@ const Login = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const { refreshUser } = useAuth();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -25,9 +28,13 @@ const Login = () => {
         email,
         password,
       });
+      await refreshUser(); // Refresh the user data after successful login
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.msg || "Login failed. Please check your credentials.");
+      setError(
+        err.response?.data?.msg ||
+          "Login failed. Please check your credentials."
+      );
       console.error(err.response?.data);
     } finally {
       setLoading(false);

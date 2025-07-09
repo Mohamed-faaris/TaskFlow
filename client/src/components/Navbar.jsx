@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get("/api/auth");
-        setUser(res.data);
-      } catch (err) {
-        console.error(err);
-        navigate("/login");
-      }
-    };
-    fetchUser();
-  }, [navigate]);
 
   const onLogout = async () => {
     try {
