@@ -57,15 +57,12 @@ nav a {
 }
 
 .form-container {
-  max-width: 450px;
-  margin: 3rem auto;
-  padding: 3rem;
-  background: rgba(30, 30, 30, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  color: #fff;
-  backdrop-filter: blur(10px);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .form-container h1 {
@@ -77,27 +74,23 @@ nav a {
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 15px;
+  text-align: left;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: #e0e0e0;
+  margin-bottom: 5px;
+  color: #333;
   font-weight: 500;
-  font-size: 0.9rem;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #fff;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 .form-group input:focus {
@@ -144,10 +137,12 @@ nav a {
 }
 
 .loading {
+  color: #2196f3;
+  margin: 20px 0;
+  font-weight: 500;
   text-align: center;
   padding: 2rem;
   font-size: 1.2rem;
-  color: #646cff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -610,6 +605,16 @@ nav a {
 
 .activity-log-content li:last-child {
   border-bottom: none;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #ef5350;
+  text-align: left;
 }
 
 /* Keyframes for animated gradient */
