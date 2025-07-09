@@ -101,7 +101,7 @@ TaskFlow/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/taskflow.git
+git clone https://github.com/Mohamed-faaris/TaskFlow.git
 cd taskflow
 
 # Or download and extract ZIP file
