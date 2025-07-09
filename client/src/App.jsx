@@ -18,14 +18,16 @@ function App() {
             path="/"
             element={
               <PrivateRoute>
-                <KanbanBoard />
+                <>
+                  <KanbanBoard />
+                  <ActivityLog />
+                </>
               </PrivateRoute>
             }
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-        <ActivityLog />
       </div>
     </Router>
   );
