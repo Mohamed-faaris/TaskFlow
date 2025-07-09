@@ -11,8 +11,9 @@ import {
   Timer,
   CheckCircle,
 } from "lucide-react";
+import { API_URL } from "../config";
 
-const socket = io("http://localhost:5000", {
+const socket = io(API_URL, {
   withCredentials: true,
   transports: ["websocket", "polling"],
 });

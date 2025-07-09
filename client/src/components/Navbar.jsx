@@ -11,7 +11,7 @@ const Navbar = () => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const res = await axios.get("http://localhost:5000/api/auth", {
+          const res = await axios.get("/api/auth", {
             headers: { "x-auth-token": token },
           });
           setUser(res.data);

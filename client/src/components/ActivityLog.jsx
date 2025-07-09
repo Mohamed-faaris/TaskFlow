@@ -2,8 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 import { ChevronUp, ChevronDown, RefreshCw } from "lucide-react";
+import { API_URL } from "../config";
 
-const socket = io("http://localhost:5000", {
+const socket = io(API_URL, {
   withCredentials: true,
   transports: ["websocket", "polling"],
 });
