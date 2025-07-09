@@ -54,10 +54,15 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/dist")));
 
   console.log("running in production mode");
-  console.log("Serving static files from:", path.join(__dirname, "../client/dist"));
+  console.log(
+    "Serving static files from:",
+    path.join(__dirname, "../client/dist")
+  );
 
   // Handle React routing, return all requests to React app
-  app.get("*", (req, res) => {
+  // Use a leading slash wildcard for Express 5 compatibility
+  // Handle React routing fallback for Single Page App using regex
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
   });
 } else {
