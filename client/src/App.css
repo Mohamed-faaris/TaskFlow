@@ -91,16 +91,19 @@ nav a {
 .form-group input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #555;
   border-radius: 4px;
   font-size: 16px;
+  background-color: #2e2e2e;
+  color: #fff;
 }
 
 .form-group input:focus {
   outline: none;
   border-color: #646cff;
   box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
 .form-group input::placeholder {
@@ -763,7 +766,8 @@ nav a {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
-  background-color: white;
+  background-color: #2e2e2e;
+  color: #fff;
   cursor: pointer;
   margin-top: 4px;
 }
@@ -779,22 +783,23 @@ nav a {
 }
 
 /* Priority colors in the dropdown */
-.priority-select option[value="urgent"] {
+/* Priority colors in the dropdown */
+.priority-select option[value="Urgent"] {
   color: #9c27b0;
   font-weight: 500;
 }
 
-.priority-select option[value="high"] {
+.priority-select option[value="High"] {
   color: #f44336;
   font-weight: 500;
 }
 
-.priority-select option[value="medium"] {
+.priority-select option[value="Medium"] {
   color: #ff9800;
   font-weight: 500;
 }
 
-.priority-select option[value="low"] {
+.priority-select option[value="Low"] {
   color: #4caf50;
   font-weight: 500;
 }
@@ -814,4 +819,36 @@ nav a {
 
 .auth-link a:hover {
   text-decoration: underline;
+}
+
+/* Dark Mode Overrides */
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+.container {
+  background-color: #121212;
+}
+.form-container {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+.form-group input,
+.priority-select,
+.form-container button {
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+.form-group input:focus,
+.priority-select:focus,
+.form-container button:hover {
+  background-color: #3e3e3e;
+  border-color: #646cff;
+}
+.auth-link {
+  color: #ccc;
+}
+.auth-link a {
+  color: #81a1c1;
 }
