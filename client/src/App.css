@@ -735,6 +735,7 @@ nav a {
   font-size: 16px;
   background-color: white;
   cursor: pointer;
+  margin-top: 4px;
 }
 
 .priority-select:focus {
@@ -743,20 +744,27 @@ nav a {
   box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
 }
 
-/* Priority colors */
-.priority-low {
-  border-left: 4px solid #4caf50;
+.priority-select option {
+  padding: 8px;
 }
 
-.priority-medium {
-  border-left: 4px solid #ff9800;
+/* Priority colors in the dropdown */
+.priority-select option[value="urgent"] {
+  color: #9c27b0;
+  font-weight: 500;
 }
 
-.priority-high {
-  border-left: 4px solid #f44336;
+.priority-select option[value="high"] {
+  color: #f44336;
+  font-weight: 500;
 }
 
-.priority-urgent {
-  border-left: 4px solid #9c27b0;
-  background-color: rgba(156, 39, 176, 0.1);
+.priority-select option[value="medium"] {
+  color: #ff9800;
+  font-weight: 500;
+}
+
+.priority-select option[value="low"] {
+  color: #4caf50;
+  font-weight: 500;
 }

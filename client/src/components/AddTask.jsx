@@ -13,10 +13,10 @@ const AddTask = ({ onTaskAdded }) => {
       return;
     }
     try {
-      const res = await axios.post("/api/tasks", { 
-        title, 
+      const res = await axios.post("/api/tasks", {
+        title,
         description,
-        priority 
+        priority,
       });
       onTaskAdded(res.data);
       setTitle("");
