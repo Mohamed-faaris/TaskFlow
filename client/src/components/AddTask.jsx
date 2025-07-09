@@ -21,7 +21,7 @@ const AddTask = ({ onTaskAdded }) => {
       onTaskAdded(res.data);
       setTitle("");
       setDescription("");
-      setPriority("medium");
+      setPriority("Medium");
     } catch (err) {
       console.error(err);
     }
@@ -54,10 +54,10 @@ const AddTask = ({ onTaskAdded }) => {
           onChange={(e) => setPriority(e.target.value)}
           className="priority-select"
         >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-          <option value="urgent">Urgent</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Urgent">Urgent</option>
         </select>
       </div>
       <button type="submit" className="btn btn-block">
