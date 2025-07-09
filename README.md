@@ -66,9 +66,14 @@ TaskFlow is designed to eliminate the chaos of traditional task management. Our 
 Before you begin, ensure you have the following installed:
 
 - **Node.js** (v16 or higher) - [Download here](https://nodejs.org/)
-- **MongoDB** (v4.4 or higher) - [Installation guide](https://docs.mongodb.com/manual/installation/)
 - **Git** - [Download here](https://git-scm.com/downloads)
 - **npm** or **yarn** (comes with Node.js)
+
+**Database Options (choose one):**
+
+- **Docker** (recommended) - [Download here](https://www.docker.com/get-started) - For easy MongoDB setup
+- **MongoDB** (v4.4 or higher) - [Installation guide](https://docs.mongodb.com/manual/installation/) - For local installation
+- **MongoDB Atlas** - [Sign up here](https://www.mongodb.com/atlas) - For cloud database
 
 ### 📁 Project Structure
 
@@ -103,20 +108,19 @@ cd taskflow
 # Or download and extract ZIP file
 ```
 
-#### 2. Backend Setup
+#### 2. Install Dependencies
 
 ```bash
 # Navigate to the project root
 cd taskflow
 
-# Install root dependencies (includes concurrently for running both servers)
-npm install
+# Install all dependencies for both client and server
+npm run install
 
-# Navigate to server directory
-cd server
-
-# Install server dependencies
-npm install
+# This script automatically installs:
+# - Root dependencies (concurrently, nodemon, etc.)
+# - Client dependencies (React, Vite, etc.)
+# - Server dependencies (Express, MongoDB, Socket.IO, etc.)
 ```
 
 #### 3. Environment Configuration
@@ -147,7 +151,99 @@ DEBUG=taskflow:*
 
 #### 4. Database Setup
 
-**Option A: Local MongoDB**
+**Option A: Docker MongoDB (Recommended for Development)**
+
+**Method 1: Docker Run Command**
+
+```bash
+# Pull and run MongoDB in Docker container
+docker run -d \
+  --name taskflow-mongo \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=password \
+  -e MONGO_INITDB_DATABASE=taskflow \
+  -v taskflow-data:/data/db \
+  mongo:latest
+
+# For Windows Command Prompt:
+docker run -d --name taskflow-mongo -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password -e MONGO_INITDB_DATABASE=taskflow -v taskflow-data:/data/db mongo:latest
+
+# Check if container is running
+docker ps
+
+# View container logs
+docker logs taskflow-mongo
+
+# To stop the container
+docker stop taskflow-mongo
+
+# To start existing container
+docker start taskflow-mongo
+
+# To remove container (careful: this deletes data if no volume used)
+docker rm taskflow-mongo
+
+# To remove container and volume
+docker rm taskflow-mongo
+docker volume rm taskflow-data
+```
+
+**Method 2: Docker Compose (Easier Management)**
+
+Create a `docker-compose.yml` file in your project root:
+
+```yaml
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: taskflow-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: taskflow
+    volumes:
+      - taskflow-data:/data/db
+    networks:
+      - taskflow-network
+
+volumes:
+  taskflow-data:
+
+networks:
+  taskflow-network:
+    driver: bridge
+```
+
+```bash
+# Start MongoDB with Docker Compose
+docker-compose up -d
+
+# View logs
+docker-compose logs mongodb
+
+# Stop MongoDB
+docker-compose down
+
+# Stop and remove everything (including data)
+docker-compose down -v
+
+# Restart services
+docker-compose restart
+```
+
+**Environment Configuration:**
+
+Update your `.env` file with:
+```env
+MONGO_URI=mongodb://admin:password@localhost:27017/taskflow?authSource=admin
+```
+
+**Option B: Local MongoDB Installation**
 
 ```bash
 # Start MongoDB service (varies by OS)
@@ -158,7 +254,7 @@ DEBUG=taskflow:*
 # The application will automatically create the database and collections
 ```
 
-**Option B: MongoDB Atlas (Cloud)**
+**Option C: MongoDB Atlas (Cloud)**
 
 1. Create a free account at [MongoDB Atlas](https://www.mongodb.com/atlas)
 2. Create a new cluster
@@ -167,13 +263,7 @@ DEBUG=taskflow:*
 
 #### 5. Frontend Setup
 
-```bash
-# Open a new terminal and navigate to client directory
-cd client
-
-# Install frontend dependencies
-npm install
-```
+The frontend dependencies have already been installed in step 2. The client directory is now ready to use!
 
 #### 6. Running the Application
 
