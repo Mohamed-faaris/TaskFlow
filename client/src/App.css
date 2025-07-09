@@ -158,6 +158,12 @@ button:hover {
   gap: 5px;
 }
 
+.smart-assign-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
@@ -166,6 +172,7 @@ button:hover {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Slightly more transparent */
+  -webkit-backdrop-filter: blur(8px); /* Frosted glass effect for Safari */
   backdrop-filter: blur(8px); /* Frosted glass effect */
   display: flex;
   justify-content: center;
@@ -262,6 +269,7 @@ button:hover {
 
 .add-task-container {
   margin-bottom: 20px;
+  width:80%
 }
 
 .add-task-form {
@@ -412,6 +420,22 @@ button:hover {
   font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
+  flex-grow: 1;
+}
+
+.activity-log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  margin-top: 10px;
+}
+
+.btn-refresh {
+  background: none;
+  border: none;
+  color: #a0a0a0;
+  cursor: pointer;
 }
 
 .activity-log-content ul {
@@ -438,7 +462,14 @@ button:hover {
   }
 
   .kanban-board {
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    overflow-x: hidden;
+  }
+
+  .task-list {
+    width: 90%;
   }
 
   .form-container, .modal-content {
@@ -456,9 +487,6 @@ button:hover {
     padding: 0.5rem;
   }
 
-  .task-list {
-    width: 280px;
-  }
 
   .activity-log-drawer {
     width: 100%;

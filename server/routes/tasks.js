@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 });
 
 // Create a task
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { title, description, assignedTo, status, priority } = req.body;
 
   try {
@@ -34,9 +34,9 @@ router.post("/", async (req, res) => {
 
     const task = await newTask.save();
 
-    // Create action log without user authentication for now
+    // Create action log with user authentication
     const action = new Action({
-      user: null, // Will be null for now
+      user: req.user.id,
       action: `created task "${title}"`,
     });
     await action.save();
@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update a task
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const { title, description, assignedTo, status, priority, version } =
     req.body;
 
@@ -76,7 +76,7 @@ router.put("/:id", async (req, res) => {
     await task.save();
 
     const action = new Action({
-      user: null, // Will be null for now
+      user: req.user.id,
       action: `updated task "${title}"`,
     });
     await action.save();

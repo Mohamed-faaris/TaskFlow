@@ -159,12 +159,14 @@ const KanbanBoard = () => {
                             <p>{task.description}</p>
                             <p>Priority: {task.priority}</p>
                             <p>Assigned to: {task.assignedTo?.username}</p>
-                            <button
-                              onClick={() => handleSmartAssign(task._id)}
-                              className="btn-smart-assign"
-                            >
-                              <BrainCircuit size={16} /> Smart Assign
-                            </button>
+                            <div className="smart-assign-container">
+                              <button
+                                onClick={() => handleSmartAssign(task._id)}
+                                className="btn-smart-assign"
+                              >
+                                <BrainCircuit size={16} /> Smart Assign
+                              </button>
+                            </div>
                           </div>
                         )}
                       </Draggable>

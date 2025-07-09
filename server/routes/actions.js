@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const actions = await Action.find()
       .sort({ timestamp: -1 })
       .limit(20)
-      .populate("user", "username");
+      .populate("user", "username email");
     res.json(actions);
   } catch (err) {
     console.error(err.message);

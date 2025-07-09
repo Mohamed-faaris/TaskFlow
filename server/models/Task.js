@@ -1,5 +1,16 @@
 import mongoose from "mongoose";
 
+const ChecklistItemSchema = new mongoose.Schema({
+  text: {
+    type: String,
+    required: true,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 const TaskSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -22,6 +33,7 @@ const TaskSchema = new mongoose.Schema({
     enum: ["Low", "Medium", "High"],
     default: "Medium",
   },
+  checklist: [ChecklistItemSchema],
   version: {
     type: Number,
     default: 1,
