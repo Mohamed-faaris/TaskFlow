@@ -11,13 +11,13 @@ import taskRoutes from "./routes/tasks.js";
 import actionRoutes from "./routes/actions.js";
 import smartAssignRoutes from "./routes/smart-assign.js";
 
-dotenv.config({ path: "../.env" });
-
-connectDB();
-
 // Get directory name for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, "../.env") });
+
+connectDB();
 
 const app = express();
 app.use(express.json({ extended: false }));
@@ -52,6 +52,9 @@ app.use("/api/tasks", smartAssignRoutes);
 if (process.env.NODE_ENV === "production") {
   // Serve static files from the client dist folder
   app.use(express.static(path.join(__dirname, "../client/dist")));
+
+  console.log("running in production mode");
+  console.log("Serving static files from:", path.join(__dirname, "../client/dist"));
 
   // Handle React routing, return all requests to React app
   app.get("*", (req, res) => {
