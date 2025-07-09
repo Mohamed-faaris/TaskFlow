@@ -11,7 +11,7 @@ import taskRoutes from "./routes/tasks.js";
 import actionRoutes from "./routes/actions.js";
 import smartAssignRoutes from "./routes/smart-assign.js";
 
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 connectDB();
 
