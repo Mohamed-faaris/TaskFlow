@@ -114,7 +114,7 @@ cd taskflow
 cd taskflow
 
 # Install all dependencies for both client and server
-npm run install
+npm run install-both
 
 # This script automatically installs:
 # - Root dependencies (concurrently, nodemon, etc.)
@@ -124,7 +124,7 @@ npm run install
 
 #### 3. Environment Configuration
 
-Create a `.env` file in the `server` directory:
+Create a `.env` file:
 
 ```env
 # Database Configuration
