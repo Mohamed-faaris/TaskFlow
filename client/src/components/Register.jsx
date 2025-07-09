@@ -43,43 +43,46 @@ const Register = () => {
       {loading ? (
         <div className="loading">Creating your account...</div>
       ) : (
-        <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            minLength="6"
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      <div className="auth-link">
-        Already have an account? <Link to="/login">Login here</Link>
-      </div>
+        <>
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                name="username"
+                value={username}
+                onChange={onChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                minLength="6"
+                required
+              />
+            </div>
+            <button type="submit">Register</button>
+          </form>
+          <div className="auth-link">
+            Already have an account? <Link to="/login">Login here</Link>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -768,3 +768,20 @@ nav a {
   color: #4caf50;
   font-weight: 500;
 }
+
+.auth-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #e0e0e0;
+}
+
+.auth-link a {
+  color: #646cff;
+  text-decoration: none;
+  margin-left: 5px;
+  font-weight: 500;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
