@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import ActivityLog from "./components/ActivityLog";
 import Navbar from "./components/Navbar";
+import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 
 function App() {
@@ -13,7 +14,14 @@ function App() {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/" element={<KanbanBoard />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <KanbanBoard />
+              </PrivateRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

@@ -347,28 +347,50 @@ button:hover {
   align-items: center;
   background: #333;
   color: #fff;
-  padding: 1rem;
+  padding: 1rem 2rem;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  box-sizing: border-box;
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand a {
   color: #fff;
   text-decoration: none;
   font-size: 1.5rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand a:hover {
+  color: #646cff;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .navbar-links a {
   color: #fff;
   text-decoration: none;
-  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #646cff;
 }
 
 .navbar-user {
-  margin-right: 1rem;
+  color: #e0e0e0;
+  font-size: 0.9rem;
 }
 
 .btn-logout {
@@ -378,6 +400,12 @@ button:hover {
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: #d32f2f;
 }
 
 .container {
@@ -475,6 +503,33 @@ button:hover {
     padding: 1rem;
   }
 
+  .navbar {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .navbar-brand a {
+    font-size: 1.3rem;
+  }
+
+  .navbar-links {
+    gap: 0.5rem;
+  }
+
+  .navbar-links a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .navbar-user {
+    font-size: 0.8rem;
+  }
+
+  .btn-logout {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
   .kanban-board {
     flex-direction: column;
     align-items: center;
@@ -501,6 +556,34 @@ button:hover {
     padding: 0.5rem;
   }
 
+  .navbar {
+    padding: 0.8rem;
+  }
+
+  .navbar-brand a {
+    font-size: 1.2rem;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-end;
+  }
+
+  .navbar-links a {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .navbar-user {
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .btn-logout {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
 
   .activity-log-drawer {
     width: 100%;
