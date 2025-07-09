@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -21,13 +22,18 @@ connectDB();
 
 const app = express();
 app.use(express.json({ extended: false }));
+app.use(cookieParser()); // Add cookie parser middleware
 
 // Configure CORS based on environment
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
       ? process.env.CLIENT_URL || "http://localhost:5000" // In production, serve from same origin
-      : ["http://localhost:5173", "http://localhost:3000"], // Development origins
+      : [
+          "http://localhost:5173",
+          "http://localhost:3000",
+          "http://localhost:5002",
+        ], // Development origins
   credentials: true,
   optionsSuccessStatus: 200,
 };

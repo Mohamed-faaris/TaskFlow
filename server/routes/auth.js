@@ -39,7 +39,14 @@ router.post("/register", async (req, res) => {
       { expiresIn: 3600 },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        // Set JWT in HTTP-only cookie
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+          maxAge: 3600000, // 1 hour in milliseconds
+        });
+        res.json({ success: true });
       }
     );
   } catch (err) {
@@ -79,7 +86,14 @@ router.post("/login", async (req, res) => {
       { expiresIn: 3600 },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        // Set JWT in HTTP-only cookie
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+          maxAge: 3600000, // 1 hour in milliseconds
+        });
+        res.json({ success: true });
       }
     );
   } catch (err) {
@@ -99,6 +113,17 @@ router.get("/", auth, async (req, res) => {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
+});
+
+// Logout
+router.post("/logout", (req, res) => {
+  res.cookie("token", "", {
+    httpOnly: true,
+    expires: new Date(0), // This will immediately expire the cookie
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+  res.json({ success: true });
 });
 
 export default router;

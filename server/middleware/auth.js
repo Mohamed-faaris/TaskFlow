@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 
 export default function (req, res, next) {
-  // Get token from header
-  const token = req.header("x-auth-token");
+  // Get token from cookie
+  const token = req.cookies.token;
 
   // Check if not token
   if (!token) {

@@ -8,26 +8,25 @@ const Navbar = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const res = await axios.get("/api/auth", {
-            headers: { "x-auth-token": token },
-          });
-          setUser(res.data);
-        } catch (err) {
-          console.error(err);
-          localStorage.removeItem("token");
-        }
+      try {
+        const res = await axios.get("/api/auth");
+        setUser(res.data);
+      } catch (err) {
+        console.error(err);
+        navigate("/login");
       }
     };
     fetchUser();
-  }, []);
+  }, [navigate]);
 
-  const onLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    navigate("/login");
+  const onLogout = async () => {
+    try {
+      await axios.post("/api/auth/logout");
+      setUser(null);
+      navigate("/login");
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
   };
 
   return (

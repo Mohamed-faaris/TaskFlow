@@ -19,11 +19,10 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("/api/auth/login", {
+      await axios.post("/api/auth/login", {
         email,
         password,
       });
-      localStorage.setItem("token", res.data.token);
       navigate("/");
     } catch (err) {
       console.error(err.response.data);
