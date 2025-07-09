@@ -8,6 +8,7 @@ const Login = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const { email, password } = formData;
@@ -18,6 +19,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
       await axios.post("/api/auth/login", {
         email,
@@ -25,7 +27,8 @@ const Login = () => {
       });
       navigate("/");
     } catch (err) {
-      console.error(err.response.data);
+      setError(err.response?.data?.msg || "Login failed. Please check your credentials.");
+      console.error(err.response?.data);
     } finally {
       setLoading(false);
     }
@@ -34,6 +37,7 @@ const Login = () => {
   return (
     <div className="form-container">
       <h1>Login</h1>
+      {error && <div className="error-message">{error}</div>}
       {loading ? (
         <div className="loading">Logging in...</div>
       ) : (

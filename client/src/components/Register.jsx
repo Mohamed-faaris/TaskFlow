@@ -8,6 +8,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const { username, email, password } = formData;
@@ -17,23 +19,31 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
     try {
-      const res = await axios.post("/api/auth/register", {
+      await axios.post("/api/auth/register", {
         username,
         email,
         password,
       });
-      console.log(res.data);
       navigate("/login");
     } catch (err) {
-      console.error(err.response.data);
+      setError(err.response?.data?.msg || "Registration failed. Please try again.");
+      console.error(err.response?.data);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="form-container">
       <h1>Register</h1>
-      <form onSubmit={onSubmit}>
+      {error && <div className="error-message">{error}</div>}
+      {loading ? (
+        <div className="loading">Creating your account...</div>
+      ) : (
+        <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Username</label>
           <input
