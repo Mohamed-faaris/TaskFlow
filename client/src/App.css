@@ -645,13 +645,14 @@ nav a {
 }
 
 .error-message {
-  background-color: #ffebee;
-  color: #c62828;
+  background-color: rgba(244, 67, 54, 0.15);
+  color: #ff6b6b;
   padding: 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   margin-bottom: 20px;
-  border: 1px solid #ef5350;
+  border: 1px solid rgba(244, 67, 54, 0.3);
   text-align: left;
+  font-size: 0.9rem;
 }
 
 /* Keyframes for animated gradient */
@@ -813,19 +814,22 @@ nav a {
 }
 
 .auth-link {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   text-align: center;
-  color: #e0e0e0;
+  color: #b0b0b0;
+  font-size: 0.95rem;
 }
 
 .auth-link a {
-  color: #646cff;
+  color: #747bff;
   text-decoration: none;
   margin-left: 5px;
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .auth-link a:hover {
+  color: #646cff;
   text-decoration: underline;
 }
 
