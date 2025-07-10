@@ -446,7 +446,7 @@ nav a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #333;
+  background: #1a1a1a;
   color: #fff;
   padding: 1rem 2rem;
   position: fixed;
@@ -455,7 +455,8 @@ nav a {
   width: 100%;
   box-sizing: border-box;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #333;
 }
 
 .navbar-brand a {
@@ -505,25 +506,25 @@ nav a {
 }
 
 .navbar-links a {
-  color: #fff;
+  color: #e0e0e0;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 .navbar-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #646cff;
+  background-color: rgba(100, 108, 255, 0.15);
+  color: #747bff;
 }
 
 .navbar-user {
   color: #e0e0e0;
   font-size: 0.9rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(100, 108, 255, 0.12);
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(100, 108, 255, 0.2);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -540,7 +541,7 @@ nav a {
   color: #fff;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 500;
@@ -549,7 +550,7 @@ nav a {
 }
 
 .btn-logout:hover {
-  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+  background: linear-gradient(135deg, #f55a4e, #e33630);
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(244, 67, 54, 0.4);
 }
