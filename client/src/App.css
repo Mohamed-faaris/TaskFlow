@@ -130,11 +130,11 @@ nav a {
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .form-container button:hover {
-  background: linear-gradient(135deg, #5a5fcf, #4f54c5);
+  background: linear-gradient(135deg, #747bff, #646cff);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(100, 108, 255, 0.3);
 }
